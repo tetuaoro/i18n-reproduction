@@ -38,12 +38,74 @@ pub fn App() -> impl IntoView {
 /// Renders the home page of your application.
 #[component]
 fn AepaPage() -> impl IntoView {
+    let i18n = use_i18n();
+
+    let title = t!(i18n, aepa.meta_title);
+
     // Creates a reactive value to update the button
     let (count, set_count) = create_signal(0);
     let on_click = move |_| set_count.update(|count| *count += 1);
 
     view! {
+	<Title text=title/>
+
         <h1>"Welcome to Leptos!"</h1>
+        <button on:click=on_click>"Click Me: " {count}</button>
+    }
+}
+
+#[component]
+fn BPage() -> impl IntoView {
+    let i18n = use_i18n();
+
+    let q = "my-q-search-param";
+
+    let title = move || t_string!(i18n, auraa.meta_title, q = q);
+
+    // Creates a reactive value to update the button
+    let (count, set_count) = create_signal(0);
+    let on_click = move |_| set_count.update(|count| *count += 1);
+
+    view! {
+	<Title text=title/>
+
+        <h1>"B Page!"</h1>
+        <button on:click=on_click>"Click Me: " {count}</button>
+    }
+}
+
+#[component]
+fn CPage() -> impl IntoView {
+    let i18n = use_i18n();
+
+    let title = t!(i18n, putatoro.meta_title);
+
+    // Creates a reactive value to update the button
+    let (count, set_count) = create_signal(0);
+    let on_click = move |_| set_count.update(|count| *count += 1);
+
+    view! {
+	<Title text=title/>
+
+        <h1>"C Page!"</h1>
+        <button on:click=on_click>"Click Me: " {count}</button>
+    }
+}
+
+#[component]
+fn DPage() -> impl IntoView {
+    let i18n = use_i18n();
+
+    let title = t!(i18n, e404.meta_title);
+
+    // Creates a reactive value to update the button
+    let (count, set_count) = create_signal(0);
+    let on_click = move |_| set_count.update(|count| *count += 1);
+
+    view! {
+	<Title text=title/>
+
+        <h1>"D Page!"</h1>
         <button on:click=on_click>"Click Me: " {count}</button>
     }
 }
