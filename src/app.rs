@@ -27,6 +27,9 @@ pub fn App() -> impl IntoView {
                         <I18nRoute view=Outlet>
                             <Route path="" view=AepaPage/>
                             <Route path="/aepa" view=AepaPage/>
+                            <Route path="/b" view=BPage/>
+                            <Route path="/c" view=CPage/>
+                            <Route path="/d" view=DPage/>
                         </I18nRoute>
                     </Routes>
                 </main>
