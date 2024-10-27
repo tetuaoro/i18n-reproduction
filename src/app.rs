@@ -38,11 +38,17 @@ pub fn App() -> impl IntoView {
 /// Renders the home page of your application.
 #[component]
 fn AepaPage() -> impl IntoView {
+    let i18n = use_i18n();
+
+    let title = move || t_string!(i18n, aepa.meta_title);
+
     // Creates a reactive value to update the button
     let count = RwSignal::new(0);
     let on_click = move |_| count.update(|count| *count += 1);
 
     view! {
+	<Title text=title/>
+
         <h1>"Welcome to Leptos!"</h1>
         <button on:click=on_click>"Click Me: " {count}</button>
     }
