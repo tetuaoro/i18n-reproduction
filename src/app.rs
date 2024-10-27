@@ -1,7 +1,7 @@
 use crate::error_template::{AppError, ErrorTemplate};
-use leptos::*;
+use leptos::prelude::*;
 use leptos_meta::*;
-use leptos_router::*;
+use leptos_router::{components::*, *};
 use crate::i18n::*;
 
 #[component]
@@ -21,12 +21,12 @@ pub fn App() -> impl IntoView {
         <Stylesheet id="leptos" href="/pkg/i18n.css"/>
 
 	<I18nContextProvider>
-            <Router fallback=error_page>
+            <Router>
                 <main>
-                    <Routes>
+                    <Routes fallback=error_page>
                         <I18nRoute view=Outlet>
-                            <Route path="" view=AepaPage/>
-                            <Route path="/aepa" view=AepaPage/>
+                            <Route path=path!("") view=AepaPage/>
+                            <Route path=path!("/aepa") view=AepaPage/>
                         </I18nRoute>
                     </Routes>
                 </main>
@@ -39,8 +39,8 @@ pub fn App() -> impl IntoView {
 #[component]
 fn AepaPage() -> impl IntoView {
     // Creates a reactive value to update the button
-    let (count, set_count) = create_signal(0);
-    let on_click = move |_| set_count.update(|count| *count += 1);
+    let count = RwSignal::new(0);
+    let on_click = move |_| count.update(|count| *count += 1);
 
     view! {
         <h1>"Welcome to Leptos!"</h1>
