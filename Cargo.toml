@@ -1,6 +1,6 @@
 [package]
 name = "i18n"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [lib]
@@ -20,9 +20,10 @@ wasm-bindgen = "=0.2.93"
 thiserror = "1"
 tracing = { version = "0.1", optional = true }
 http = "1"
+leptos_i18n = { version = "0.4.1", default-features = false, features = ["yaml_files", "track_locale_files", "interpolate_display"] }
 
 [features]
-hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
+hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate", "leptos_i18n/hydrate"]
 ssr = [
     "dep:axum",
     "dep:tokio",
@@ -33,7 +34,13 @@ ssr = [
     "leptos_meta/ssr",
     "leptos_router/ssr",
     "dep:tracing",
+    "leptos_i18n/axum",
 ]
+
+[package.metadata.leptos-i18n]
+default = "fr"
+locales = ["fr", "ty", "en"]
+namespaces = ["e404", "routes", "aepa", "auraa", "putatoro"]
 
 # Defines a size-optimized profile for the WASM bundle in release mode
 [profile.wasm-release]
